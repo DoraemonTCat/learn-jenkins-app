@@ -1,30 +1,29 @@
 pipeline {
     agent any
-
+ 
     stages {
-        stage('without docker') { // เปลี่ยนชื่อ stage ให้ชัดเจน
-            steps {
-                sh '''
-                echo "Running without Docker"
-                ls -la
-                touch container-no.txt
-                '''
-            }
-        }
-
-        stage('w/ docker') { // เปลี่ยนชื่อ stage เพื่อให้ชัดเจน
-            agent {
-                docker {
+        stage('with Docker') {
+            agent{
+                docker{
                     image 'node:18-alpine'
                 }
             }
             steps {
                 sh '''
-                echo "Running with Docker"
-                ls -la
-                touch container-yes.txt
+                    echo "with docker"
+                    npm --version
+                    touch "with-container.txt"
                 '''
             }
         }
+        stage('without Docker') {
+            steps {
+                sh '''
+                    echo "without docker"
+                    touch "without-container.txt"
+                '''
+            }
+        }
+       
     }
 }
