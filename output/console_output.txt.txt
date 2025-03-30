@@ -1,0 +1,210 @@
+Started by user Chayanin Kummuang
+Obtained Jenkinsfile from git https://github.com/DoraemonTCat/learn-jenkins-app.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/Lab_Devops
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/Lab_Devops/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/DoraemonTCat/learn-jenkins-app.git # timeout=10
+Fetching upstream changes from https://github.com/DoraemonTCat/learn-jenkins-app.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5'
+ > git fetch --tags --force --progress -- https://github.com/DoraemonTCat/learn-jenkins-app.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision bdeeed362c92e9cd16e727aa952ca5b525943b27 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f bdeeed362c92e9cd16e727aa952ca5b525943b27 # timeout=10
+Commit message: " Skibidi Toilet"
+ > git rev-list --no-walk c61261d40da63218ea6cb00a93fff6be5efe3e16 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $NETLIFY_AUTH_TOKEN
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] getContext
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker inspect -f . node:18-alpine
+.
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] withDockerContainer
+Jenkins seems to be running inside container eff4c5fde1869c36e102a2bdac61e05325c5a5821d95c57c9dab02fbcb7d3087
+but /var/jenkins_home/workspace/Lab_Devops could not be found among []
+but /var/jenkins_home/workspace/Lab_Devops@tmp could not be found among []
+$ docker run -t -d -u 1000:1000 -w /var/jenkins_home/workspace/Lab_Devops -v /var/jenkins_home/workspace/Lab_Devops:/var/jenkins_home/workspace/Lab_Devops:rw,z -v /var/jenkins_home/workspace/Lab_Devops@tmp:/var/jenkins_home/workspace/Lab_Devops@tmp:rw,z -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** node:18-alpine cat
+$ docker top e8249c57f5efaa4c79cad9a60419f80163032d0c5882588a5f552eecfd7e67f3 -eo pid,comm
+[Pipeline] {
+[Pipeline] echo
+🔧 Checking required files...
+[Pipeline] sh
++ test -f index.html
++ test -f netlify/functions/quote.js
++ echo '✅ Build check passed.'
+✅ Build check passed.
+[Pipeline] }
+$ docker stop --time=1 e8249c57f5efaa4c79cad9a60419f80163032d0c5882588a5f552eecfd7e67f3
+$ docker rm -f --volumes e8249c57f5efaa4c79cad9a60419f80163032d0c5882588a5f552eecfd7e67f3
+[Pipeline] // withDockerContainer
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] getContext
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker inspect -f . node:18-alpine
+.
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] withDockerContainer
+Jenkins seems to be running inside container eff4c5fde1869c36e102a2bdac61e05325c5a5821d95c57c9dab02fbcb7d3087
+but /var/jenkins_home/workspace/Lab_Devops could not be found among []
+but /var/jenkins_home/workspace/Lab_Devops@tmp could not be found among []
+$ docker run -t -d -u 1000:1000 -w /var/jenkins_home/workspace/Lab_Devops -v /var/jenkins_home/workspace/Lab_Devops:/var/jenkins_home/workspace/Lab_Devops:rw,z -v /var/jenkins_home/workspace/Lab_Devops@tmp:/var/jenkins_home/workspace/Lab_Devops@tmp:rw,z -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** node:18-alpine cat
+$ docker top aeb3904b5f5e646d17f05d537e228366cfcdd2f52dc2cca2fb5bfc8336054c6c -eo pid,comm
+[Pipeline] {
+[Pipeline] echo
+🧪 Testing quote function load...
+[Pipeline] sh
++ node -e 'require('"'"'./netlify/functions/quote.js'"'"'); console.log('"'"'✅ Function loaded successfully'"'"')'
+✅ Function loaded successfully
+[Pipeline] }
+$ docker stop --time=1 aeb3904b5f5e646d17f05d537e228366cfcdd2f52dc2cca2fb5bfc8336054c6c
+$ docker rm -f --volumes aeb3904b5f5e646d17f05d537e228366cfcdd2f52dc2cca2fb5bfc8336054c6c
+[Pipeline] // withDockerContainer
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy)
+[Pipeline] getContext
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker inspect -f . node:18-alpine
+.
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] withDockerContainer
+Jenkins seems to be running inside container eff4c5fde1869c36e102a2bdac61e05325c5a5821d95c57c9dab02fbcb7d3087
+but /var/jenkins_home/workspace/Lab_Devops could not be found among []
+but /var/jenkins_home/workspace/Lab_Devops@tmp could not be found among []
+$ docker run -t -d -u 1000:1000 -w /var/jenkins_home/workspace/Lab_Devops -v /var/jenkins_home/workspace/Lab_Devops:/var/jenkins_home/workspace/Lab_Devops:rw,z -v /var/jenkins_home/workspace/Lab_Devops@tmp:/var/jenkins_home/workspace/Lab_Devops@tmp:rw,z -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** node:18-alpine cat
+$ docker top 9181e117dee5ae886b8e09957285ab82cdf7600d713152f3da20a078091195b9 -eo pid,comm
+[Pipeline] {
+[Pipeline] echo
+🚀 Deploying to Netlify...
+[Pipeline] sh
++ npm install netlify-cli
+npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated npmlog@5.0.1: This package is no longer supported.
+npm warn deprecated gauge@3.0.2: This package is no longer supported.
+npm warn deprecated are-we-there-yet@2.0.0: This package is no longer supported.
+npm warn deprecated glob@8.1.0: Glob versions prior to v9 are no longer supported
+
+changed 1596 packages, and audited 1666 packages in 1m
+
+257 packages are looking for funding
+  run `npm fund` for details
+
+14 vulnerabilities (3 low, 8 moderate, 3 high)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
++ node_modules/.bin/netlify deploy '--auth=****' '--site=c6568d18-754e-4174-9cbe-beccffa47fbf' '--dir=.' --prod
+Deploy path:        /var/jenkins_home/workspace/Lab_Devops
+Functions path:     /var/jenkins_home/workspace/Lab_Devops/netlify/functions
+Configuration path: /var/jenkins_home/workspace/Lab_Devops/netlify.toml
+Deploying to main site URL...
+[33m⠋[39m Uploading blobs to deploy store...
+
+​
+Netlify Build                                                 
+────────────────────────────────────────────────────────────────
+​
+❯ Version
+  @netlify/build 30.0.6
+​
+❯ Flags
+  auth: ****
+  deployId: 67e90b7ef55cc0eeecf740ae
+  dir: .
+  open: false
+  prod: true
+  prodIfUnlocked: false
+  site: c6568d18-754e-4174-9cbe-beccffa47fbf
+  skipFunctionsCache: false
+​
+❯ Current directory
+  /var/jenkins_home/workspace/Lab_Devops
+​
+❯ Config file
+  /var/jenkins_home/workspace/Lab_Devops/netlify.toml
+​
+❯ Context
+  dev
+[33m⠙[39m Finished uploading blobs to deploy store
+[33m⠋[39m Hashing files...
+[33m⠋[39m Looking for a functions cache...
+[33m⠙[39m No cached functions were found
+[33m⠙[39m Finished hashing 29 files and 1 functions
+[33m⠋[39m CDN diffing files...
+[33m⠙[39m CDN requesting 1 files and 0 functions
+[33m⠋[39m Uploading 1 files
+[33m⠙[39m Finished uploading 1 assets
+[33m⠋[39m Waiting for deploy to go live...
+[33m⠙[39m Deploy is live!
+
+Build logs:         https://app.netlify.com/sites/labdevops/deploys/67e90b7ef55cc0eeecf740ae
+Function logs:      https://app.netlify.com/sites/labdevops/logs/functions
+Edge function Logs: https://app.netlify.com/sites/labdevops/logs/edge-functions
+Unique deploy URL:  https://67e90b7ef55cc0eeecf740ae--labdevops.netlify.app
+Website URL:        https://labdevops.netlify.app
+[Pipeline] }
+$ docker stop --time=1 9181e117dee5ae886b8e09957285ab82cdf7600d713152f3da20a078091195b9
+$ docker rm -f --volumes 9181e117dee5ae886b8e09957285ab82cdf7600d713152f3da20a078091195b9
+[Pipeline] // withDockerContainer
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Post Deploy)
+[Pipeline] echo
+✅ Deployment complete! Your app is live.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+🎉 CI/CD pipeline finished successfully.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
