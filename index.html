@@ -40,7 +40,11 @@
     <h1>🚽 Skibidi Toilet 🎵</h1>
     <p class="skibidi">🎶 Skibidi dop dop yes yes 🎶</p>
     <button class="btn" onclick="playMusic()">▶ เล่นเพลง</button>
-    <audio id="music" src="skibidi.mp3"></audio>
+    <audio id="music">
+      <source src="skibidi.mp3" type="audio/mpeg">
+      <source src="skibidi.ogg" type="audio/ogg">
+      Your browser does not support the audio element.
+    </audio>
   </div>
 
   <script>
