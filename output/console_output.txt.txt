@@ -1,8 +1,10 @@
 Started by user Chayanin Kummuang
+
 Obtained Jenkinsfile from git https://github.com/DoraemonTCat/learn-jenkins-app.git
 [Pipeline] Start of Pipeline
 [Pipeline] node
-Running on Jenkins in /var/jenkins_home/workspace/Lab_Devops
+Running on Jenkins
+ in /var/jenkins_home/workspace/Lab_Devops
 [Pipeline] {
 [Pipeline] stage
 [Pipeline] { (Declarative: Checkout SCM)
@@ -18,11 +20,11 @@ Fetching upstream changes from https://github.com/DoraemonTCat/learn-jenkins-app
  > git --version # 'git version 2.39.5'
  > git fetch --tags --force --progress -- https://github.com/DoraemonTCat/learn-jenkins-app.git +refs/heads/*:refs/remotes/origin/* # timeout=10
  > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
-Checking out Revision bdeeed362c92e9cd16e727aa952ca5b525943b27 (refs/remotes/origin/main)
+Checking out Revision ec68d91c5a84b9157e9a26a4cae6fbec6010e68c (refs/remotes/origin/main)
  > git config core.sparsecheckout # timeout=10
- > git checkout -f bdeeed362c92e9cd16e727aa952ca5b525943b27 # timeout=10
-Commit message: " Skibidi Toilet"
- > git rev-list --no-walk c61261d40da63218ea6cb00a93fff6be5efe3e16 # timeout=10
+ > git checkout -f ec68d91c5a84b9157e9a26a4cae6fbec6010e68c # timeout=10
+Commit message: "pp"
+ > git rev-list --no-walk 939b0b0e7db0a0aa9c1d65979c648093f9c1a5a9 # timeout=10
 [Pipeline] }
 [Pipeline] // stage
 [Pipeline] withEnv
@@ -44,11 +46,11 @@ Masking supported pattern matches of $NETLIFY_AUTH_TOKEN
 [Pipeline] }
 [Pipeline] // withEnv
 [Pipeline] withDockerContainer
-Jenkins seems to be running inside container eff4c5fde1869c36e102a2bdac61e05325c5a5821d95c57c9dab02fbcb7d3087
+Jenkins seems to be running inside container 6424fa874640a9c9997ef79dea6d7cf76c23cf8082f735aae6dd6c9d46bc61d4
 but /var/jenkins_home/workspace/Lab_Devops could not be found among []
 but /var/jenkins_home/workspace/Lab_Devops@tmp could not be found among []
 $ docker run -t -d -u 1000:1000 -w /var/jenkins_home/workspace/Lab_Devops -v /var/jenkins_home/workspace/Lab_Devops:/var/jenkins_home/workspace/Lab_Devops:rw,z -v /var/jenkins_home/workspace/Lab_Devops@tmp:/var/jenkins_home/workspace/Lab_Devops@tmp:rw,z -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** node:18-alpine cat
-$ docker top e8249c57f5efaa4c79cad9a60419f80163032d0c5882588a5f552eecfd7e67f3 -eo pid,comm
+$ docker top 2310d0a16e62f490186d189e61af2f531eaf0ebb6a820f142d03250f773f8fca -eo pid,comm
 [Pipeline] {
 [Pipeline] echo
 🔧 Checking required files...
@@ -58,8 +60,173 @@ $ docker top e8249c57f5efaa4c79cad9a60419f80163032d0c5882588a5f552eecfd7e67f3 -e
 + echo '✅ Build check passed.'
 ✅ Build check passed.
 [Pipeline] }
-$ docker stop --time=1 e8249c57f5efaa4c79cad9a60419f80163032d0c5882588a5f552eecfd7e67f3
-$ docker rm -f --volumes e8249c57f5efaa4c79cad9a60419f80163032d0c5882588a5f552eecfd7e67f3
+$ docker stop --time=1 2310d0a16e62f490186d189e61af2f531eaf0ebb6a820f142d03250f773f8fca
+$ docker rm -f --volumes 2310d0a16e62f490186d189e61af2f531eaf0ebb6a820f142d03250f773f8fca
+[Pipeline] // withDockerContainer
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Code Linting)
+[Pipeline] getContext
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker inspect -f . node:18-alpine
+.
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] withDockerContainer
+Jenkins seems to be running inside container 6424fa874640a9c9997ef79dea6d7cf76c23cf8082f735aae6dd6c9d46bc61d4
+but /var/jenkins_home/workspace/Lab_Devops could not be found among []
+but /var/jenkins_home/workspace/Lab_Devops@tmp could not be found among []
+$ docker run -t -d -u 1000:1000 -w /var/jenkins_home/workspace/Lab_Devops -v /var/jenkins_home/workspace/Lab_Devops:/var/jenkins_home/workspace/Lab_Devops:rw,z -v /var/jenkins_home/workspace/Lab_Devops@tmp:/var/jenkins_home/workspace/Lab_Devops@tmp:rw,z -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** node:18-alpine cat
+$ docker top 3b648f699eb2ed1c986140bc92a79ddccd5cb5f3bb1897eb9a64875a1a00f137 -eo pid,comm
+[Pipeline] {
+[Pipeline] echo
+🔍 Running ESLint for code quality check...
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ npm install eslint
+
+
+up to date, audited 152 packages in 5s
+
+31 packages are looking for funding
+  run `npm fund` for details
+
+6 vulnerabilities (3 low, 3 high)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
++ npx eslint .
+
+
+Oops! Something went wrong! :(
+
+ESLint: 9.23.0
+
+ESLint couldn't find an eslint.config.(js|mjs|cjs) file.
+
+From ESLint v9.0.0, the default configuration file is now eslint.config.js.
+If you are using a .eslintrc.* file, please follow the migration guide
+to update your configuration file to the new format:
+
+https://eslint.org/docs/latest/use/configure/migration-guide
+
+If you still have problems after following the migration guide, please stop by
+https://eslint.org/chat/help to chat with the team.
+
++ echo '❌ Linting errors found!'
+❌ Linting errors found!
+[Pipeline] echo
+✅ Code linting passed.
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+$ docker stop --time=1 3b648f699eb2ed1c986140bc92a79ddccd5cb5f3bb1897eb9a64875a1a00f137
+
+$ docker rm -f --volumes 3b648f699eb2ed1c986140bc92a79ddccd5cb5f3bb1897eb9a64875a1a00f137
+
+[Pipeline] // withDockerContainer
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Security Scan)
+[Pipeline] getContext
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker inspect -f . node:18-alpine
+.
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] withDockerContainer
+Jenkins seems to be running inside container 6424fa874640a9c9997ef79dea6d7cf76c23cf8082f735aae6dd6c9d46bc61d4
+but /var/jenkins_home/workspace/Lab_Devops could not be found among []
+but /var/jenkins_home/workspace/Lab_Devops@tmp could not be found among []
+$ docker run -t -d -u 1000:1000 -w /var/jenkins_home/workspace/Lab_Devops -v /var/jenkins_home/workspace/Lab_Devops:/var/jenkins_home/workspace/Lab_Devops:rw,z -v /var/jenkins_home/workspace/Lab_Devops@tmp:/var/jenkins_home/workspace/Lab_Devops@tmp:rw,z -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** node:18-alpine cat
+$ docker top 929b6829e7fe7f1697431be56c8547c1dd5237d87245e2e73d9d2a082c041fc3 -eo pid,comm
+[Pipeline] {
+[Pipeline] echo
+🔒 Running security scan with npm audit...
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
+
++ npm install
+
+
+up to date, audited 152 packages in 1s
+
+31 packages are looking for funding
+  run `npm fund` for details
+
+6 vulnerabilities (3 low, 3 high)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
++ npm audit --production
+npm warn config production Use `--omit=dev` instead.
+
+# npm audit report
+
+body-parser  <1.20.3
+Severity: high
+body-parser vulnerable to denial of service when url encoding is enabled - https://github.com/advisories/GHSA-qwcr-r2fm-qrc7
+fix available via `npm audit fix`
+node_modules/body-parser
+  express  <=4.21.1 || 5.0.0-alpha.1 - 5.0.0
+  Depends on vulnerable versions of body-parser
+  Depends on vulnerable versions of cookie
+  Depends on vulnerable versions of path-to-regexp
+  Depends on vulnerable versions of send
+  Depends on vulnerable versions of serve-static
+  node_modules/express
+
+cookie  <0.7.0
+cookie accepts cookie name, path, and domain with out of bounds characters - https://github.com/advisories/GHSA-pxg6-pf52-xh8x
+fix available via `npm audit fix`
+node_modules/cookie
+
+
+path-to-regexp  <=0.1.11
+Severity: high
+Unpatched `path-to-regexp` ReDoS in 0.1.x - https://github.com/advisories/GHSA-rhx6-c78j-4q9w
+path-to-regexp outputs backtracking regular expressions - https://github.com/advisories/GHSA-9wv6-86v2-598j
+fix available via `npm audit fix`
+node_modules/path-to-regexp
+
+send  <0.19.0
+send vulnerable to template injection that can lead to XSS - https://github.com/advisories/GHSA-m6fv-jmcg-4jfg
+fix available via `npm audit fix`
+node_modules/send
+  serve-static  <=1.16.0
+  Depends on vulnerable versions of send
+  node_modules/serve-static
+
+
+6 vulnerabilities (3 low, 3 high)
+
+To address all issues, run:
+  npm audit fix
++ echo '❌ Security vulnerabilities found!'
+❌ Security vulnerabilities found!
+[Pipeline] echo
+✅ Security scan passed.
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+$ docker stop --time=1 929b6829e7fe7f1697431be56c8547c1dd5237d87245e2e73d9d2a082c041fc3
+
+$ docker rm -f --volumes 929b6829e7fe7f1697431be56c8547c1dd5237d87245e2e73d9d2a082c041fc3
+
 [Pipeline] // withDockerContainer
 [Pipeline] }
 [Pipeline] // stage
@@ -75,20 +242,22 @@ $ docker rm -f --volumes e8249c57f5efaa4c79cad9a60419f80163032d0c5882588a5f552ee
 [Pipeline] }
 [Pipeline] // withEnv
 [Pipeline] withDockerContainer
-Jenkins seems to be running inside container eff4c5fde1869c36e102a2bdac61e05325c5a5821d95c57c9dab02fbcb7d3087
+Jenkins seems to be running inside container 6424fa874640a9c9997ef79dea6d7cf76c23cf8082f735aae6dd6c9d46bc61d4
 but /var/jenkins_home/workspace/Lab_Devops could not be found among []
 but /var/jenkins_home/workspace/Lab_Devops@tmp could not be found among []
 $ docker run -t -d -u 1000:1000 -w /var/jenkins_home/workspace/Lab_Devops -v /var/jenkins_home/workspace/Lab_Devops:/var/jenkins_home/workspace/Lab_Devops:rw,z -v /var/jenkins_home/workspace/Lab_Devops@tmp:/var/jenkins_home/workspace/Lab_Devops@tmp:rw,z -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** node:18-alpine cat
-$ docker top aeb3904b5f5e646d17f05d537e228366cfcdd2f52dc2cca2fb5bfc8336054c6c -eo pid,comm
+$ docker top 5a460f4f5bd08629ed81f77b808ff87bf13b0643a6eece5464b84020a4854506 -eo pid,comm
 [Pipeline] {
 [Pipeline] echo
 🧪 Testing quote function load...
 [Pipeline] sh
+
 + node -e 'require('"'"'./netlify/functions/quote.js'"'"'); console.log('"'"'✅ Function loaded successfully'"'"')'
 ✅ Function loaded successfully
 [Pipeline] }
-$ docker stop --time=1 aeb3904b5f5e646d17f05d537e228366cfcdd2f52dc2cca2fb5bfc8336054c6c
-$ docker rm -f --volumes aeb3904b5f5e646d17f05d537e228366cfcdd2f52dc2cca2fb5bfc8336054c6c
+$ docker stop --time=1 5a460f4f5bd08629ed81f77b808ff87bf13b0643a6eece5464b84020a4854506
+
+$ docker rm -f --volumes 5a460f4f5bd08629ed81f77b808ff87bf13b0643a6eece5464b84020a4854506
 [Pipeline] // withDockerContainer
 [Pipeline] }
 [Pipeline] // stage
@@ -104,25 +273,32 @@ $ docker rm -f --volumes aeb3904b5f5e646d17f05d537e228366cfcdd2f52dc2cca2fb5bfc8
 [Pipeline] }
 [Pipeline] // withEnv
 [Pipeline] withDockerContainer
-Jenkins seems to be running inside container eff4c5fde1869c36e102a2bdac61e05325c5a5821d95c57c9dab02fbcb7d3087
+Jenkins seems to be running inside container 6424fa874640a9c9997ef79dea6d7cf76c23cf8082f735aae6dd6c9d46bc61d4
 but /var/jenkins_home/workspace/Lab_Devops could not be found among []
 but /var/jenkins_home/workspace/Lab_Devops@tmp could not be found among []
 $ docker run -t -d -u 1000:1000 -w /var/jenkins_home/workspace/Lab_Devops -v /var/jenkins_home/workspace/Lab_Devops:/var/jenkins_home/workspace/Lab_Devops:rw,z -v /var/jenkins_home/workspace/Lab_Devops@tmp:/var/jenkins_home/workspace/Lab_Devops@tmp:rw,z -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** node:18-alpine cat
-$ docker top 9181e117dee5ae886b8e09957285ab82cdf7600d713152f3da20a078091195b9 -eo pid,comm
+
+$ docker top c094e0e2581e430d77e9fdd2d430e036e2372787e782fd4b1a55006c1577ab34 -eo pid,comm
 [Pipeline] {
 [Pipeline] echo
 🚀 Deploying to Netlify...
 [Pipeline] sh
 + npm install netlify-cli
+
 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+
 npm warn deprecated npmlog@5.0.1: This package is no longer supported.
+
 npm warn deprecated gauge@3.0.2: This package is no longer supported.
+
 npm warn deprecated are-we-there-yet@2.0.0: This package is no longer supported.
+
 npm warn deprecated glob@8.1.0: Glob versions prior to v9 are no longer supported
 
-changed 1596 packages, and audited 1666 packages in 1m
 
-257 packages are looking for funding
+added 1596 packages, and audited 1751 packages in 45s
+
+275 packages are looking for funding
   run `npm fund` for details
 
 14 vulnerabilities (3 low, 8 moderate, 3 high)
@@ -132,10 +308,13 @@ To address all issues, run:
 
 Run `npm audit` for details.
 + node_modules/.bin/netlify deploy '--auth=****' '--site=c6568d18-754e-4174-9cbe-beccffa47fbf' '--dir=.' --prod
+
 Deploy path:        /var/jenkins_home/workspace/Lab_Devops
 Functions path:     /var/jenkins_home/workspace/Lab_Devops/netlify/functions
 Configuration path: /var/jenkins_home/workspace/Lab_Devops/netlify.toml
+
 Deploying to main site URL...
+
 [33m⠋[39m Uploading blobs to deploy store...
 
 ​
@@ -147,7 +326,7 @@ Netlify Build
 ​
 ❯ Flags
   auth: ****
-  deployId: 67e90b7ef55cc0eeecf740ae
+  deployId: 67ea8e4c3216ac1ea3448e2e
   dir: .
   open: false
   prod: true
@@ -167,22 +346,25 @@ Netlify Build
 [33m⠋[39m Hashing files...
 [33m⠋[39m Looking for a functions cache...
 [33m⠙[39m No cached functions were found
-[33m⠙[39m Finished hashing 29 files and 1 functions
+[33m⠙[39m Finished hashing 35 files and 1 functions
 [33m⠋[39m CDN diffing files...
-[33m⠙[39m CDN requesting 1 files and 0 functions
-[33m⠋[39m Uploading 1 files
-[33m⠙[39m Finished uploading 1 assets
+
+[33m⠙[39m CDN requesting 3 files and 0 functions
+[33m⠋[39m Uploading 3 files
+
+[33m⠙[39m Finished uploading 3 assets
 [33m⠋[39m Waiting for deploy to go live...
 [33m⠙[39m Deploy is live!
 
-Build logs:         https://app.netlify.com/sites/labdevops/deploys/67e90b7ef55cc0eeecf740ae
+Build logs:         https://app.netlify.com/sites/labdevops/deploys/67ea8e4c3216ac1ea3448e2e
 Function logs:      https://app.netlify.com/sites/labdevops/logs/functions
 Edge function Logs: https://app.netlify.com/sites/labdevops/logs/edge-functions
-Unique deploy URL:  https://67e90b7ef55cc0eeecf740ae--labdevops.netlify.app
+Unique deploy URL:  https://67ea8e4c3216ac1ea3448e2e--labdevops.netlify.app
 Website URL:        https://labdevops.netlify.app
 [Pipeline] }
-$ docker stop --time=1 9181e117dee5ae886b8e09957285ab82cdf7600d713152f3da20a078091195b9
-$ docker rm -f --volumes 9181e117dee5ae886b8e09957285ab82cdf7600d713152f3da20a078091195b9
+$ docker stop --time=1 c094e0e2581e430d77e9fdd2d430e036e2372787e782fd4b1a55006c1577ab34
+
+$ docker rm -f --volumes c094e0e2581e430d77e9fdd2d430e036e2372787e782fd4b1a55006c1577ab34
 [Pipeline] // withDockerContainer
 [Pipeline] }
 [Pipeline] // stage
