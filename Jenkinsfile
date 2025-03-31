@@ -7,6 +7,40 @@ pipeline {
     }
 
     stages {
+        stage('Code Linting') {
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
+            }
+            steps {
+                echo "🔍 Running ESLint for code quality check..."
+                sh '''
+                    npm install eslint
+                    npx eslint . || (echo "❌ Linting errors found!" && exit 1)
+                    echo "✅ Code linting passed."
+                '''
+            }
+        }
+
+        stage('Security Scan') {
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
+            }
+            steps {
+                echo "🔒 Running security scan with npm audit..."
+                sh '''
+                    npm install
+                    npm audit --production || (echo "❌ Security vulnerabilities found!" && exit 1)
+                    echo "✅ Security scan passed."
+                '''
+            }
+        }
+
         stage('Build') {
             agent {
                 docker {
